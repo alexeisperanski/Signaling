@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HomeSignal : MonoBehaviour
+public class Alarm: MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rigidbody2D;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Rigidbody2D _rigidbody2D;
+    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private float _timeForChangeVolume;
     
     private bool _isAlarm = false;
@@ -31,25 +31,23 @@ public class HomeSignal : MonoBehaviour
             if (_signalChange != null)
                 StopCoroutine(_signalChange);
 
-            _signalChange = StartCoroutine(SignalVolume());
+            _signalChange = StartCoroutine(SignalVolume(_isAlarm ? 1 : 0));
         }
     }
 
-    private IEnumerator SignalVolume()
+    private IEnumerator SignalVolume(int targetVolume)
     {
-        if (audioSource.isPlaying == false && _isAlarm == true)
-            audioSource.Play();
+        if (_audioSource.isPlaying == false && _isAlarm == true)
+            _audioSource.Play();
 
-        int targetVolume = _isAlarm ? 1 : 0;
-
-        while (audioSource.volume != targetVolume)
+        while (_audioSource.volume != targetVolume)
         {
-            audioSource.volume = Mathf.MoveTowards(audioSource.volume, targetVolume, Time.deltaTime / _timeForChangeVolume) ;
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, Time.deltaTime / _timeForChangeVolume) ;
             yield return new WaitForFixedUpdate();
         }
 
         if (_isAlarm == false)
-            audioSource.Stop();
+            _audioSource.Stop();
     }
 }
 
