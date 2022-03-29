@@ -1020,7 +1020,6 @@ GameObject:
   - component: {fileID: 1508006711}
   - component: {fileID: 1508006713}
   - component: {fileID: 1508006710}
-  - component: {fileID: 1508006714}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -1040,9 +1039,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86b75afb55c7384f87d60503ff44f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody2D: {fileID: 1508006715}
-  _audioSource: {fileID: 1508006713}
-  _description: 3
+  rigidbody2D: {fileID: 1508006715}
+  audioSource: {fileID: 1508006713}
+  _timeForChangeVolume: 3
 --- !u!61 &1508006711
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1179,20 +1178,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1508006714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508006709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3314c943cbe87e9438b00201944c4331, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audio: {fileID: 1508006713}
-  _description: 2
 --- !u!50 &1508006715
 Rigidbody2D:
   serializedVersion: 4

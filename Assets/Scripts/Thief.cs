@@ -6,7 +6,7 @@ public class Thief : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
-    void Update()
+    private void Update()
     {
         if(Input.GetKey(KeyCode.A))
             transform.Translate(_speed * Time.deltaTime * -1, 0, 0);
