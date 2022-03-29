@@ -37,13 +37,15 @@ public class Alarm: MonoBehaviour
 
     private IEnumerator SignalVolume(int targetVolume)
     {
+        var waitForFixedUpdate = new WaitForFixedUpdate();
+
         if (_audioSource.isPlaying == false && _isAlarm == true)
             _audioSource.Play();
 
         while (_audioSource.volume != targetVolume)
         {
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, Time.deltaTime / _timeForChangeVolume) ;
-            yield return new WaitForFixedUpdate();
+            yield return waitForFixedUpdate;
         }
 
         if (_isAlarm == false)
