@@ -883,8 +883,9 @@ GameObject:
   - component: {fileID: 1495055757}
   - component: {fileID: 1495055756}
   - component: {fileID: 1495055755}
-  - component: {fileID: 1495055754}
   - component: {fileID: 1495055758}
+  - component: {fileID: 1495055754}
+  - component: {fileID: 1495055759}
   m_Layer: 0
   m_Name: Thief
   m_TagString: Untagged
@@ -904,7 +905,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f598065403863e640b3a13105e68f255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
 --- !u!70 &1495055755
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1007,6 +1007,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1495055759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495055753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f5ca1fe46cbda545b7a5592707ce24c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 5
 --- !u!1 &1508006709
 GameObject:
   m_ObjectHideFlags: 0

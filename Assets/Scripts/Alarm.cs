@@ -3,43 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Alarm: MonoBehaviour
+public class Alarm : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private float _timeForChangeVolume;
-    
-    private bool _isAlarm = false;
+    [SerializeField] private Door _door;
+
     private Coroutine _signalChange = null;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnEnable()
     {
-        DetectThief(collision, true);
+        _door.IsOpen += OnIsDoor;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnDisable()
     {
-        DetectThief(collision, false);
+        _door.IsOpen -= OnIsDoor;
     }
 
-    private void DetectThief(Collider2D collision, bool isEnter)
+    private void OnIsDoor(bool flag)
     {
-        if (collision.TryGetComponent<Thief>(out Thief thief))
-        {
-            _isAlarm = isEnter;
+        if (_signalChange != null)
+            StopCoroutine(_signalChange);
 
-            if (_signalChange != null)
-                StopCoroutine(_signalChange);
-
-            _signalChange = StartCoroutine(SignalVolume(_isAlarm ? 1 : 0));
-        }
+        _signalChange = StartCoroutine(SignalVolume(flag));
     }
 
-    private IEnumerator SignalVolume(int targetVolume)
+    private IEnumerator SignalVolume(bool flag)
     {
         var waitForFixedUpdate = new WaitForFixedUpdate();
+        int targetVolume = flag ? 1 : 0;
 
-        if (_audioSource.isPlaying == false && _isAlarm == true)
+        if (_audioSource.isPlaying == false && flag == true)
             _audioSource.Play();
 
         while (_audioSource.volume != targetVolume)
@@ -48,7 +43,7 @@ public class Alarm: MonoBehaviour
             yield return waitForFixedUpdate;
         }
 
-        if (_isAlarm == false)
+        if (flag == false)
             _audioSource.Stop();
     }
 }
