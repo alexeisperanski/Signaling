@@ -43,7 +43,8 @@ public class DoorSignal : MonoBehaviour
 
     private IEnumerator OnSignal()
     {
-        _audioSource.Play();
+        if(_audioSource.isPlaying == false)
+            _audioSource.Play();
 
         while (_audioSource.volume < 1) 
         {
